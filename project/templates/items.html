@@ -12,6 +12,10 @@
             <input name="{{  object.pk }}" type="checkbox">{{ object.name }} {% widthratio object.price 100 1 %}
             {{ object.currency.name }}<br>
         {% endfor %}
-        <input type="submit" value="Сделать заказ">
+        <input type="text" name="coupon" placeholder="промокод"><br>
+        <input type="submit" value="Сделать заказ"><br>
+        Промокоды:<br>
+    PLwcQhwt - Скидка 5%<br>
+    cHoXIKiZ - Скидка 10%<br>
     </form>
 {% endblock %}

@@ -7,13 +7,14 @@
         {{ object.currency.name }}<br>
     {% endfor %}
     <h4> Сумма: {% widthratio price 100 1 %} {{ items.0.currency.name }}</h4>
+    Примененные купоны: {{ coupon }}<br>
     <button id="buy-button">Купить</button>
     <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
     <script>
       var stripe = Stripe("{{ STRIPE_PK }}");
       var buyButton = document.getElementById('buy-button');
       buyButton.addEventListener('click', function() {
-        fetch('{% url 'create_session_order' order.number %}', {method: 'GET'})
+        fetch('{% url 'create_session_order' order.number %}?coupon={{ coupon }}', {method: 'GET'})
         .then(response => {
             return response.json()
         })

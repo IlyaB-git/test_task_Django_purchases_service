@@ -34,13 +34,4 @@ class Order(models.Model):
         verbose_name = 'Заказ'
         verbose_name_plural = 'Заказы'
 
-class Discount(models.Model):
-    discount = models.PositiveIntegerField(verbose_name='Скидка')
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, verbose_name='Заказ')
 
-    def __str__(self):
-         return self.pk
-
-    class Meta:
-        verbose_name = 'Скидка'
-        verbose_name_plural = 'Скидки'

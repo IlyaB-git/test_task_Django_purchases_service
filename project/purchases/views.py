@@ -1,8 +1,7 @@
-from django.urls import reverse
 from django.views.generic.base import View, TemplateView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-from django.shortcuts import redirect, get_object_or_404, render, get_list_or_404, HttpResponse
+from django.shortcuts import redirect, get_object_or_404, render, get_list_or_404
 from django.http import JsonResponse
 from config.settings import STRIPE_PK
 from .models import Item, Order
@@ -20,11 +19,12 @@ class CreateSession(View):
             price = 0
             for item_ in order:
                 price += item_.item.price
-            return JsonResponse(create_session(item_.item.currency, 'Заказ'+str(kwargs['id']), price))
+            return JsonResponse(create_session(item_.item.currency, 'Заказ'+str(kwargs['id']),
+                                               price, self.request.GET.get('coupon')))
 
 
 class ItemView(DetailView):
-    template_name = 'item.html'
+    template_name = '../templates/item.html'
     model = Item
     pk_url_kwarg = 'item_id'
     extra_context = {'STRIPE_PK': STRIPE_PK}
@@ -32,11 +32,11 @@ class ItemView(DetailView):
 
 class ItemsView(ListView):
     model = Item
-    template_name = 'items.html'
+    template_name = '../templates/items.html'
 
 
 class SuccessView(TemplateView):
-    template_name = 'success.html'
+    template_name = '../templates/success.html'
 
 
 class CreateOrder(View):
@@ -51,13 +51,13 @@ class CreateOrder(View):
             if request.POST.get(str(item.pk)):
                 if items:
                     if items[-1].currency != item.currency:
-                        return render(request, 'order_error_1.html')
+                        return render(request, '../templates/order_error_1.html')
                 order = Order.objects.create(number=num, item=item)
                 items += [item]
                 price += item.price
         if not items:
-            return render(request, 'order_error_2.html')
-        return render(request, 'order.html', {'items': items, 'price': price,
+            return render(request, '../templates/order_error_2.html')
+        return render(request, '../templates/order.html', {'items': items, 'price': price, 'coupon': request.POST.get('coupon'),
                                               'order': order, 'STRIPE_PK': STRIPE_PK})
 
 

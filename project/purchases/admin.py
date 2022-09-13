@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Currency, Item, Order, Discount
+from .models import Currency, Item, Order
 
 
 
@@ -16,4 +16,3 @@ class OrderAdmin(admin.ModelAdmin):
 admin.site.register(Currency)
 admin.site.register(Item, ItemAdmin)
 admin.site.register(Order, OrderAdmin)
-admin.site.register(Discount)
