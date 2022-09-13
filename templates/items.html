@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% for object in object_list %}
+        <a href="{% url 'item_view' object.pk %}">{{ object.name }} </a>{% widthratio object.price 100 1 %}
+        {{ object.currency.name }}<br>
+    {% endfor %}
+    <hr>
+    <form method="post" action="{% url 'create_order' %}">
+    {% csrf_token %}
+        {% for object in object_list %}
+            <input name="{{  object.pk }}" type="checkbox">{{ object.name }} {% widthratio object.price 100 1 %}
+            {{ object.currency.name }}<br>
+        {% endfor %}
+        <input type="submit" value="Сделать заказ">
+    </form>
+{% endblock %}

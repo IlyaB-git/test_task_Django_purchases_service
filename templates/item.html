@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <a href="/"><h3>На главную</h3></a>
+    <h2>Страница покупки товара</h2>
+    <h2>Название: {{ object.name }}</h2>
+    <h4>{% widthratio object.price 100 1 %} {{ object.currency }}</h4>
+    <p>Описание:<br>
+        {{ object.description }}</p>
+
+    <button id="buy-button">Купить</button>
+    <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
+    <script>
+      var stripe = Stripe("{{ STRIPE_PK }}");
+      var buyButton = document.getElementById('buy-button');
+      buyButton.addEventListener('click', function() {
+        fetch('{% url 'create_session' object.pk %}', {method: 'GET'})
+        .then(response => {
+            return response.json()
+        })
+        .then(session => stripe.redirectToCheckout({ sessionId: session.id }))
+      });
+    </script>
+{% endblock %}

@@ -1,0 +1,8 @@
+#/test_task_Django_purchases_service/db.sqlite3
+*.log
+*.pot
+*.pyc
+__pycache__
+/venv/
+/.idea/
+migrations/

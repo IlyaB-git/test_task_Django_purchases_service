@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <a href="/"><h3>На главную</h3></a>
+    {% for object in items %}
+        <a href="{% url 'item_view' object.pk %}">{{ object.name }} </a>{% widthratio object.price 100 1 %}
+        {{ object.currency.name }}<br>
+    {% endfor %}
+    <h4> Сумма: {% widthratio price 100 1 %} {{ items.0.currency.name }}</h4>
+    <button id="buy-button">Купить</button>
+    <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
+    <script>
+      var stripe = Stripe("{{ STRIPE_PK }}");
+      var buyButton = document.getElementById('buy-button');
+      buyButton.addEventListener('click', function() {
+        fetch('{% url 'create_session_order' order.number %}', {method: 'GET'})
+        .then(response => {
+            return response.json()
+        })
+        .then(session => stripe.redirectToCheckout({ sessionId: session.id }))
+      });
+    </script>
+{% endblock %}
+
