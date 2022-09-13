@@ -6,7 +6,7 @@
 и платёжной системы __Stripe__. 
 
 В проекте есть такие сущности как ***товар***,
-***заказ***, ***валюта***, ***скидка***
+***заказ***, ***валюта***
 
 
 
@@ -40,8 +40,8 @@
 В файле ```manage.py``` установите свои SECRET_KEY, STRIPE_SK, STRIPE_PK
 И установите DEBUG = False
 
-- ```python3 manage.py runerver```
+- ```python3 manage.py runserver```
 
 ## Запуск через  Docker
 - ```sudo docker build -t dj_stripe .```
-- ```sudo docker run -p 8000:8080 dj_stripe```
+- ```sudo docker run -p 8000:8000 dj_stripe```

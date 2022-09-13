@@ -4,6 +4,6 @@ ENV PYTHONUNBUFFERED 1
 RUN mkdir /app/
 WORKDIR /app/
 COPY . .
-#EXPOSE 8000
+EXPOSE 8000
 RUN pip install --upgrade pip && pip install -r requirements.txt
 CMD ["python", "project/manage.py", "runserver"]
