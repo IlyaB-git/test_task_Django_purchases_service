@@ -26,7 +26,7 @@ def create_session(currency, name, price, discount_id=None):
         }],
         mode='payment',
         discounts=[{'coupon': discount_id}],
-        success_url='http://' + host + ':' + port + '/success',
-        cancel_url='http://' + host + ':' + port + '/cancel',
+        success_url='http://' + host + ':' + port + '/success/',
+        cancel_url='http://' + host + ':' + port + '/cancel/',
     )
     return { 'id': session.id }
