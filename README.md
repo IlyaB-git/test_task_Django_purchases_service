@@ -27,7 +27,9 @@
 
 ## Настройка базы данных
 
-В репозитории уже есть файл базы данных, команды ниже требуются после удаления ```db.sqlite3```
+В репозитории уже есть файл базы данных sqltie3, команды ниже требуются после удаления ```db.sqlite3```
+
+Если вы хотите использовать PostgreSQL, внесите в .env свои настройки.
 
 - ```python3 manage.py makemigrations purchases```
 - ```python3 manage.py migrate```
@@ -37,8 +39,12 @@
 
 ## Запуск
 
-В файле ```manage.py``` установите свои SECRET_KEY, STRIPE_SK, STRIPE_PK
-И установите DEBUG = False
+В файле ```.env``` установите свои SECRET_KEY, STRIPE_SK, STRIPE_PK
+И установите DEBUG = False.
+
+Для работы с PostgreSQL установите ```DB_ENGINE=django.db.backends.postgresql_psycopg2```, 
+а также соответсвующие параметры DB_NAME, DB_PASSWORD, DB_HOST, DB_PORT
+
 
 - ```python3 manage.py runserver```
 
