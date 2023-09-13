@@ -1,4 +1,4 @@
-# Django purchases service wuth Stripe
+# Django purchases service with Stripe
 
 
 
